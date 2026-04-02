@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>م. علي فوده — دورة التصوير السينمائي</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --dark: #0A0A0E;
+  --dark2: #111118;
+  --dark3: #1A1A24;
+  --dark4: #22222F;
+  --text: #F0EDE8;
+  --text-muted: #9090A8;
+  --accent: #C9A84C;
+  --red: #E05252;
+  --teal: #4CC9B0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background: var(--dark);
+  color: var(--text);
+  overflow-x: hidden;
+  direction: rtl;
+}
+
+/* ── GRAIN OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 60%),
+    linear-gradient(180deg, #0A0A0E 0%, #0D0D14 100%);
+  overflow: hidden;
+}
+
+.hero-film-strip {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--gold) 0px, var(--gold) 20px,
+    transparent 20px, transparent 30px
+  );
+  opacity: 0.6;
+}
+.hero-film-strip-bottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--gold) 0px, var(--gold) 20px,
+    transparent 20px, transparent 30px
+  );
+  opacity: 0.6;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 100px;
+  padding: 6px 18px;
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:0.5;transform:scale(1.3)}
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+.hero h1 span {
+  color: var(--gold);
+  display: block;
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text-muted);
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: 3rem;
+  animation: fadeUp 0.8s 0.35s ease both;
+}
+
+.hero-instructor {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 14px 24px;
+  animation: fadeUp 0.8s 0.5s ease both;
+}
+
+.instructor-avatar {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), #8B6914);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--dark);
+  flex-shrink: 0;
+}
+
+.instructor-info { text-align: right; }
+.instructor-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+.instructor-title {
+  font-size: 12px;
+  color: var(--gold);
+  margin-top: 2px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 2rem;
+  margin-top: 3rem;
+  animation: fadeUp 0.8s 0.65s ease both;
+}
+
+.stat { text-align: center; }
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+  display: block;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 2px;
+  animation: fadeUp 1s 1s ease both;
+}
+
+.scroll-arrow {
+  width: 20px; height: 20px;
+  border-right: 1.5px solid var(--gold);
+  border-bottom: 1.5px solid var(--gold);
+  transform: rotate(45deg);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%,100%{transform:rotate(45deg) translateY(0)}
+  50%{transform:rotate(45deg) translateY(6px)}
+}
+
+@keyframes fadeUp {
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ── NAV ── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,10,14,0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.nav-tab {
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: all .2s;
+  font-family: 'Cairo', sans-serif;
+}
+
+.nav-tab:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.nav-tab.active { color: var(--gold); background: rgba(201,168,76,0.1); }
+
+/* ── SECTIONS ── */
+.section-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.section-header {
+  margin-bottom: 3rem;
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(201,168,76,0.4), transparent);
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.section-title span { color: var(--gold); }
+
+/* ── CARDS GRID ── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--dark2);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .3s, border-color .3s, box-shadow .3s;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(201,168,76,0.35);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.1);
+}
+
+.card-img-wrap {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .5s;
+  filter: brightness(0.85) saturate(0.9);
+}
+
+.card:hover .card-img {
+  transform: scale(1.06);
+  filter: brightness(0.95) saturate(1.1);
+}
+
+.card-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(10,10,14,0.95) 100%);
+}
+
+.card-img-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(201,168,76,0.9);
+  color: #000;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 100px;
+  letter-spacing: 1px;
+}
+
+.card-img-num {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.08);
+  line-height: 1;
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+.card-en {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.card-ar {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.card-film {
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-film::before {
+  content: '🎬';
+  font-size: 12px;
+}
+
+.card-arrow {
+  width: 28px; height: 28px;
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 12px;
+  transition: all .2s;
+}
+
+.card:hover .card-arrow {
+  background: var(--gold);
+  color: var(--dark);
+}
+
+/* ── MODAL ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  backdrop-filter: blur(8px);
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--dark2);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 20px;
+  max-width: 640px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: modalIn .35s ease;
+}
+
+@keyframes modalIn {
+  from{opacity:0;transform:scale(0.94) translateY(20px)}
+  to{opacity:1;transform:scale(1) translateY(0)}
+}
+
+.modal-hero-img {
+  width: 100%;
+  height: auto;
+  /* object-fit: cover; */
+  border-radius: 20px 20px 0 0;
+  display: block;
+  filter: brightness(0.8);
+}
+
+.modal-hero-ph {
+  width: 100%;
+  height: 260px;
+  background: var(--dark3);
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 36px; height: 36px;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s;
+}
+
+.modal-close:hover { background: rgba(255,255,255,0.2); }
+
+.modal-content { padding: 1.75rem; }
+
+.modal-tags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.modal-tag {
+  font-size: 11px;
+  padding: 3px 12px;
+  border-radius: 100px;
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold);
+  background: rgba(201,168,76,0.08);
+  letter-spacing: 1px;
+}
+
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.modal-title-ar {
+  font-size: 16px;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.modal-row {
+  margin-bottom: 1.25rem;
+  padding: 1rem 1.25rem;
+  background: var(--dark3);
+  border-radius: 12px;
+  border-right: 3px solid var(--gold);
+}
+
+.modal-row-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.modal-row-val {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.modal-tip {
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-top: 1rem;
+}
+
+.modal-tip-label {
+  font-size: 11px;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.modal-tip-label::before { content: '★'; }
+
+.modal-tip-val {
+  font-size: 13px;
+  color: rgba(201,168,76,0.85);
+  line-height: 1.65;
+}
+
+/* ── VIDEO SECTION ── */
+.video-refs {
+  background: var(--dark2);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.video-refs-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.video-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  text-decoration: none;
+  color: var(--text);
+  transition: color .2s;
+  font-size: 13px;
+}
+
+.video-link:last-child { border-bottom: none; }
+.video-link:hover { color: var(--teal); }
+
+.video-play {
+  width: 30px; height: 30px;
+  background: rgba(76,201,176,0.12);
+  border: 1px solid rgba(76,201,176,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+  color: var(--teal);
+}
+
+/* ── SEARCH ── */
+.search-wrap {
+  position: relative;
+  max-width: 460px;
+  margin-bottom: 2.5rem;
+}
+
+.search-wrap input {
+  width: 100%;
+  background: var(--dark2);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 12px 48px 12px 18px;
+  font-size: 14px;
+  color: var(--text);
+  font-family: 'Cairo', sans-serif;
+  transition: border-color .2s;
+}
+
+.search-wrap input:focus {
+  outline: none;
+  border-color: rgba(201,168,76,0.5);
+}
+
+.search-wrap input::placeholder { color: var(--text-muted); }
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+/* ── DIVIDER ── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
+  margin: 0;
+}
+
+/* ── GLOSSARY ── */
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.gterm {
+  background: var(--dark2);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  border-right: 3px solid rgba(201,168,76,0.4);
+  transition: border-color .2s;
+}
+
+.gterm:hover { border-color: var(--gold); }
+
+.gterm-en { font-size: 15px; font-weight: 700; color: var(--text); }
+.gterm-ar { font-size: 12px; color: var(--gold); margin: 3px 0 8px; }
+.gterm-def { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+footer strong { color: var(--gold); }
+
+/* ── PAGE SECTIONS ── */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .hero-stats { gap: 1.5rem; }
+  .nav-tabs { gap: 2px; }
+  .nav-tab { padding: 6px 10px; font-size: 12px; }
+  .cards-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-film-strip"></div>
+  <div class="hero-film-strip-bottom"></div>
+
+  <div class="hero-badge">دورة تصوير سينمائي احترافية</div>
+
+  <h1>
+    فن التصوير
+    <span>السينمائي</span>
+  </h1>
+
+  <p class="hero-sub">
+    تعلّم اللقطات والزوايا وحركة الكاميرا بأسلوب بصري احترافي — مع أمثلة حقيقية من أشهر أفلام السينما العالمية
+  </p>
+
+  <div class="hero-instructor">
+    <div class="instructor-info">
+      <div class="instructor-name">م. علي فوده</div>
+      <div class="instructor-title">مدرب التصوير والمونتاج</div>
+    </div>
+    <div class="instructor-avatar">عف</div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">23</span><span class="stat-label">نوع لقطة وزاوية</span></div>
+    <div class="stat"><span class="stat-num">3</span><span class="stat-label">أقسام رئيسية</span></div>
+    <div class="stat"><span class="stat-num">12</span><span class="stat-label">مصطلح احترافي</span></div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>ابدأ الآن</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">م. علي فوده</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('shots',this)">اللقطات</button>
+    <button class="nav-tab" onclick="showPage('angles',this)">الزوايا</button>
+    <button class="nav-tab" onclick="showPage('motion',this)">حركة الكاميرا</button>
+    <button class="nav-tab" onclick="showPage('glossary',this)">المصطلحات</button>
+  </div>
+</nav>
+
+<!-- SHOTS -->
+<div class="page active" id="page-shots">
+<div class="section-wrap">
+  <div class="section-header">
+    <div class="section-label">Camera Shots</div>
+    <h2 class="section-title">أنواع <span>اللقطات</span></h2>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" placeholder="ابحث عن لقطة..." oninput="filterCards('shots',this.value)" id="search-shots">
+  </div>
+  <div class="cards-grid" id="grid-shots"></div>
+</div>
+</div>
+
+<!-- ANGLES -->
+<div class="page" id="page-angles">
+<div class="section-wrap">
+  <div class="section-header">
+    <div class="section-label">Camera Angles</div>
+    <h2 class="section-title">زوايا <span>التصوير</span></h2>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" placeholder="ابحث عن زاوية..." oninput="filterCards('angles',this.value)">
+  </div>
+  <div class="cards-grid" id="grid-angles"></div>
+</div>
+</div>
+
+<!-- MOTION -->
+<div class="page" id="page-motion">
+<div class="section-wrap">
+  <div class="section-header">
+    <div class="section-label">Camera Motion</div>
+    <h2 class="section-title">حركة <span>الكاميرا</span></h2>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" placeholder="ابحث عن حركة..." oninput="filterCards('motion',this.value)">
+  </div>
+  <div class="cards-grid" id="grid-motion"></div>
+</div>
+</div>
+
+<!-- GLOSSARY -->
+<div class="page" id="page-glossary">
+<div class="section-wrap">
+  <div class="section-header">
+    <div class="section-label">Glossary</div>
+    <h2 class="section-title">قاموس <span>المصطلحات</span></h2>
+  </div>
+  <div class="glossary-grid" id="grid-glossary"></div>
+</div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeOv(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-img-wrap"></div>
+    <div class="modal-content">
+      <div class="modal-tags" id="modal-tags"></div>
+      <div class="modal-title" id="modal-title-en"></div>
+      <div class="modal-title-ar" id="modal-title-ar"></div>
+      <div class="modal-row">
+        <div class="modal-row-label">الوصف</div>
+        <div class="modal-row-val" id="modal-desc"></div>
+      </div>
+      <div class="modal-row">
+        <div class="modal-row-label">الغرض والتأثير</div>
+        <div class="modal-row-val" id="modal-effect"></div>
+      </div>
+      <div class="modal-row">
+        <div class="modal-row-label">متى تستخدمه؟</div>
+        <div class="modal-row-val" id="modal-when"></div>
+      </div>
+      <div id="modal-tip-wrap" class="modal-tip" style="display:none">
+        <div class="modal-tip-label">نصيحة احترافية</div>
+        <div class="modal-tip-val" id="modal-tip"></div>
+      </div>
+      <div class="video-refs" id="modal-videos" style="display:none">
+        <div class="video-refs-label">أمثلة على يوتيوب</div>
+        <div id="modal-videos-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <strong>م. علي فوده</strong> — دورة التصوير السينمائي الاحترافية<br>
+  <span style="font-size:11px;margin-top:6px;display:block">جميع الحقوق محفوظة © 2025</span>
+</footer>
+
+<script>
+const DATA = {
+  shots: [
+    {
+      en:"Extreme Close Up", ar:"لقطة مقربة جداً", badge:"ECU",
+      img:"./img/img2.png",
+      film:"أمثلة: The Dark Knight, Oldboy",
+      desc:"تصوير جزء صغير جداً من الوجه أو الجسم — عين، شفة، يد، أو تفصيلة واحدة.",
+      effect:"توجيه انتباه المشاهد بالكامل لتفصيلة واحدة. تُعبّر عن الغضب أو الإصرار أو الكشف الدراماتيكي.",
+      when:"لحظات الذروة العاطفية، كشف سر أو تفصيلة مهمة جداً.",
+      tip:"استخدمها بتحفظ — كلما قلّت كلما زاد وقعها على المشاهد.",
+      videos:[{t:"Extreme Close Up Shot Explained",u:"https://www.youtube.com/results?search_query=extreme+close+up+shot+cinematography"}]
+    },
+    {
+      en:"Close Up", ar:"لقطة مقربة", badge:"CU",
+      img:"https://images.unsplash.com/photo-1542204165-65bf26472b9b?w=600&q=80",
+      film:"أمثلة: The Godfather, Parasite",
+      desc:"الوجه من أعلى الصدر حتى الرأس مع مساحة صغيرة فوقه.",
+      effect:"إظهار المشاعر بعمق — حزن، خوف، سعادة. تُولّد تعاطفاً مباشراً مع الشخصية.",
+      when:"مشاهد الحوار الحساس، ردود الفعل، لحظات القرار المصيرية.",
+      tip:"عيون الممثل هي روح هذه اللقطة — أضِئها جيداً دائماً.",
+      videos:[{t:"Close Up Shot — How to Use It",u:"https://www.youtube.com/results?search_query=close+up+shot+film+technique"}]
+    },
+    {
+      en:"Medium Close Up", ar:"متوسطة مقربة", badge:"MCU",
+      img:"https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?w=600&q=80",
+      film:"أمثلة: No Country for Old Men, Drive",
+      desc:"من منتصف الصدر حتى الرأس، مع مساحة طبيعية فوق الرأس.",
+      effect:"تضم عدة مشاعر في آنٍ واحد وتُقرّب الشخصية عاطفياً.",
+      when:"محادثات ثنائية مكثفة، ردود الفعل المركّبة.",
+      tip:"الخيار الذهبي بين العاطفة والسياق — الأكثر استخداماً في الدراما.",
+      videos:[{t:"Medium Close Up Shot Examples",u:"https://www.youtube.com/results?search_query=medium+close+up+shot+examples"}]
+    },
+    {
+      en:"Medium Shot", ar:"اللقطة المتوسطة", badge:"MS",
+      img:"https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&q=80",
+      film:"أمثلة: Pulp Fiction, Casablanca",
+      desc:"من وسط الجسم حتى الرأس — تُظهر لغة الجسد والوجه معاً.",
+      effect:"مثالية للحوار — تجمع التعبير الوجهي مع الإيماءات الجسدية.",
+      when:"مشاهد الحوار بين شخصيتين أو أكثر.",
+      tip:"لغة الجسد في هذه اللقطة تُكمل الحوار وأحياناً تتناقض معه بشكل مثير.",
+      videos:[{t:"Medium Shot in Film",u:"https://www.youtube.com/results?search_query=medium+shot+film+technique"}]
+    },
+    {
+      en:"Medium Wide Shot", ar:"متوسطة واسعة", badge:"MWS",
+      img:"https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?w=600&q=80",
+      film:"أمثلة: Once Upon a Time in the West, 1917",
+      desc:"الشخصية من الركبة حتى الرأس مع محيطها الكامل.",
+      effect:"تُظهر مكانة الشخصية في بيئتها وتربطها بالحدث والمكان.",
+      when:"إظهار الشخصية في سياقها ومحيطها في الوقت ذاته.",
+      tip:"تمنح المشاهد إحساساً بالعالم الذي تعيشه الشخصية.",
+      videos:[{t:"Medium Wide Shot Explained",u:"https://www.youtube.com/results?search_query=medium+wide+shot+cinematography"}]
+    },
+    {
+      en:"Wide Shot", ar:"اللقطة الواسعة", badge:"WS",
+      img:"https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=600&q=80",
+      film:"أمثلة: Lawrence of Arabia, Mad Max",
+      desc:"الشخصية كاملة مع فراغ أعلى وأسفل وكثير من المعلومات في الكادر.",
+      effect:"تُعرّف المشاهد بموقع الحدث وتُوضح الصورة الكاملة.",
+      when:"بداية المشاهد، الانتقالات بين الأماكن.",
+      tip:"اجعل الشخصية تملأ ثلثي ارتفاع الكادر لتوازن بصري مثالي.",
+      videos:[{t:"Wide Shot in Filmmaking",u:"https://www.youtube.com/results?search_query=wide+shot+filmmaking+examples"}]
+    },
+    {
+      en:"Extreme Wide Shot", ar:"بانورامية واسعة", badge:"EWS",
+      img:"https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=600&q=80",
+      film:"أمثلة: Interstellar, The Revenant",
+      desc:"الشخصية صغيرة جداً والمكان يهيمن — غالباً بطائرة درون.",
+      effect:"يُظهر المكان سينمائياً ويُوحي بالوحدة أو الضآلة أمام الطبيعة.",
+      when:"فتح مشاهد جديدة، إظهار جمال أو قسوة الطبيعة والموقع.",
+      tip:"الإنسان الصغير في كادر ضخم = رسالة بصرية قوية جداً.",
+      videos:[{t:"Extreme Wide Shot Drone Cinematography",u:"https://www.youtube.com/results?search_query=extreme+wide+shot+drone+cinematography"}]
+    },
+    {
+      en:"Over The Shoulder", ar:"فوق الكتف", badge:"OTS",
+      img:"https://images.unsplash.com/photo-1493804714600-6edb1cd93080?w=600&q=80",
+      film:"أمثلة: Inception, The Social Network",
+      desc:"كتف شخص في الخلفية والشخصية الرئيسية في المقدمة.",
+      effect:"تُعطي عمقاً للمشهد وإحساساً بالحوار الطبيعي.",
+      when:"المقابلات، الحوارات الثنائية، الاستجواب.",
+      tip:"حافظ دائماً على قاعدة 180 درجة بين الشخصيتين.",
+      videos:[{t:"Over the Shoulder Shot Guide",u:"https://www.youtube.com/results?search_query=over+the+shoulder+shot+filmmaking"}]
+    },
+    {
+      en:"Point Of View", ar:"منظور الشخصية", badge:"POV",
+      img:"https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=600&q=80",
+      film:"أمثلة: 1917, Hardcore Henry",
+      desc:"الكاميرا هي عين الممثل — المشاهد يرى ما تراه الشخصية تماماً.",
+      effect:"غمر المشاهد في تجربة الشخصية — واقعية قوية ومشاركة عاطفية.",
+      when:"لحظات التوتر، الرعب، الاكتشاف المفاجئ.",
+      tip:"الاهتزاز = خوف وفقدان سيطرة. الثبات = هدوء وتحكم.",
+      videos:[{t:"POV Shot Techniques",u:"https://www.youtube.com/results?search_query=POV+shot+filmmaking+technique"}]
+    }
+  ],
+  angles: [
+    {
+      en:"Eye Level", ar:"مستوى العين", badge:"محايد",
+      img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
+      film:"أمثلة: The Shawshank Redemption, Forrest Gump",
+      desc:"الكاميرا عند مستوى عيني الممثل تماماً.",
+      effect:"محايدة عاطفياً — لا توحي بقوة أو ضعف، وتُعبّر عن كل المشاعر بشكل طبيعي.",
+      when:"الاستخدام العام، الحوارات اليومية، المشاهد الطبيعية.",
+      tip:"الزاوية الأكثر استخداماً — المشاهد لا يلاحظها وهذا هدفها بالضبط.",
+      videos:[{t:"Eye Level Camera Angle",u:"https://www.youtube.com/results?search_query=eye+level+camera+angle+film"}]
+    },
+    {
+      en:"Low Angle", ar:"الزاوية المنخفضة", badge:"قوة",
+      img:"https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=600&q=80",
+      film:"أمثلة: The Dark Knight, Citizen Kane",
+      desc:"الكاميرا تنظر للأعلى نحو الشخصية.",
+      effect:"إظهار القوة والهيمنة والعظمة — تجعل الشخصية تبدو أكبر وأقوى.",
+      when:"الأبطال، الأشرار الأقوياء، لحظات النصر.",
+      tip:"زاوية منخفضة = قوة — لكن كثرتها تُفقدها تأثيرها.",
+      videos:[{t:"Low Angle Shot Examples",u:"https://www.youtube.com/results?search_query=low+angle+shot+examples+film"}]
+    },
+    {
+      en:"High Angle", ar:"الزاوية المرتفعة", badge:"ضعف",
+      img:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&q=80",
+      film:"أمثلة: Schindler's List, The Silence of the Lambs",
+      desc:"الكاميرا تنظر للأسفل نحو الشخصية.",
+      effect:"توحي بالضعف أو الوحدة أو الشعور بالصغر والضغط.",
+      when:"لحظات اليأس، الضحايا، الشخصيات المكبوتة.",
+      tip:"كلما ارتفعت الكاميرا أكثر كلما بدت الشخصية أضعف وأصغر.",
+      videos:[{t:"High Angle Shot in Film",u:"https://www.youtube.com/results?search_query=high+angle+shot+filmmaking"}]
+    },
+    {
+      en:"Bird's Eye / Overhead", ar:"عين الطائر", badge:"شمولي",
+      img:"https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600&q=80",
+      film:"أمثلة: Blade Runner 2049, Apocalypse Now",
+      desc:"الكاميرا مباشرة من الأعلى — 90 درجة عمودية كاملة.",
+      effect:"منظور شامل يكشف التفاصيل المخفية ويُظهر الأنماط من الفوق.",
+      when:"مشاهد الاجتماعات، الطعام، الجموع، الخرائط والمواقع.",
+      tip:"رائعة لإظهار التناسق والأنماط البصرية داخل الكادر.",
+      videos:[{t:"Bird's Eye View Shot",u:"https://www.youtube.com/results?search_query=bird+eye+view+overhead+shot+cinematography"}]
+    },
+    {
+      en:"Dutch Angle", ar:"الزاوية الهولندية", badge:"توتر",
+      img:"https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80",
+      film:"أمثلة: The Third Man, Batman (1966)",
+      desc:"إمالة الكاميرا على المحور الأفقي — الأفق ينحرف بشكل مقصود.",
+      effect:"خلق إحساس بعدم الاستقرار والتوتر النفسي والغموض.",
+      when:"مشاهد الرعب، الغموض، التشويش الذهني والضغط النفسي.",
+      tip:"كلما زادت الإمالة زاد التوتر — لكن لا تُبالغ حتى لا يبدو مُفتعلاً.",
+      videos:[{t:"Dutch Angle Shot Explained",u:"https://www.youtube.com/results?search_query=dutch+angle+tilt+shot+explained"}]
+    },
+    {
+      en:"Worm's Eye", ar:"لقطة الدودة", badge:"مبالغة",
+      img:"https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80",
+      film:"أمثلة: Batman v Superman, 300",
+      desc:"الكاميرا من مستوى الأرض أو أدنى — تنظر للأعلى بشكل قصوى.",
+      effect:"تضخيم الشخصية أو الموضوع لدرجة مبالغ فيها — تأثير دراماتيكي مذهل.",
+      when:"الأبطال الخارقون، المباني الشاهقة، لحظات الهيبة القصوى.",
+      tip:"استخدمها بحذر — قوية جداً لكن الإفراط يُفقدها مصداقيتها.",
+      videos:[{t:"Worm's Eye View Shot",u:"https://www.youtube.com/results?search_query=worm+eye+view+shot+film"}]
+    },
+    {
+      en:"Reverse Angle", ar:"الزاوية العكسية", badge:"تبادل",
+      img:"https://images.unsplash.com/photo-1517783999520-f068d7431a60?w=600&q=80",
+      film:"أمثلة: Whiplash, 12 Angry Men",
+      desc:"تحويل الكاميرا لترصد وجه الممثل الآخر — تبادل وجهات النظر.",
+      effect:"يُوحي بشعور واقعي وجميل — الكاميرا تصبح عين الشخصية الأخرى.",
+      when:"الحوارات الثنائية، مشاهد الجدل والتبادل.",
+      tip:"استخدمها دائماً مع قاعدة 180 درجة لتجنب إرباك المشاهد.",
+      videos:[{t:"Reverse Angle Shot",u:"https://www.youtube.com/results?search_query=reverse+angle+shot+filmmaking"}]
+    }
+  ],
+  motion: [
+    {
+      en:"Pan Shot", ar:"حركة البان", badge:"أفقي",
+      img:"https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=600&q=80",
+      film:"أمثلة: No Country for Old Men, The Shining",
+      desc:"الكاميرا تتحرك أفقياً يميناً أو يساراً على محور ثابت.",
+      effect:"متابعة حدث أو شخصية تتحرك أفقياً، أو كشف بيئة بشكل تدريجي.",
+      when:"متابعة سيارة أو شخص، كشف منظر طبيعي، تتبع حدث.",
+      tip:"البان البطيء = هدوء وشاعرية. السريع (Whip Pan) = توتر وانتقال مفاجئ.",
+      videos:[{t:"Pan Shot Technique",u:"https://www.youtube.com/results?search_query=pan+shot+camera+technique+filmmaking"}]
+    },
+    {
+      en:"Tilt Shot", ar:"حركة التيلت", badge:"عمودي",
+      img:"https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=600&q=80",
+      film:"أمثلة: The Dark Knight Rises, Skyfall",
+      desc:"الكاميرا تتحرك رأسياً للأعلى أو للأسفل على محور ثابت.",
+      effect:"كشف شخصية أو مبنى تدريجياً من الأسفل للأعلى أو العكس.",
+      when:"إظهار شخصية دراماتيكياً، المباني الشاهقة، كشف تفصيلة.",
+      tip:"التيلت للأعلى = الكشف والأمل. للأسفل = التهديد والانهيار.",
+      videos:[{t:"Tilt Shot Examples",u:"https://www.youtube.com/results?search_query=tilt+shot+camera+movement+examples"}]
+    },
+    {
+      en:"Zoom Shot", ar:"لقطة الزوم", badge:"تكبير",
+      img:"https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&q=80",
+      film:"أمثلة: Goodfellas, Once Upon a Time in America",
+      desc:"تكبير أو تصغير الصورة بالعدسة دون تحريك الكاميرا جسدياً.",
+      effect:"الاقتراب لتفصيلة مهمة أو الابتعاد لإظهار السياق.",
+      when:"الكشف عن تفصيلة مفاجئة، لحظات الصدمة.",
+      tip:"الزوم السريع = مفاجأة. البطيء = تصاعد درامي ومدروس.",
+      videos:[{t:"Zoom Shot vs Dolly Shot",u:"https://www.youtube.com/results?search_query=zoom+shot+vs+dolly+shot+difference"}]
+    },
+    {
+      en:"Dolly Shot", ar:"لقطة الدولي", badge:"حركة جسدية",
+      img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
+      film:"أمثلة: Goodfellas (Copacabana), Touch of Evil",
+      desc:"الكاميرا تتحرك جسدياً للأمام أو للخلف على عربة.",
+      effect:"إحساس واقعي ودافئ بالاقتراب — أكثر عاطفية من الزوم.",
+      when:"الاقتراب من ممثل لكشف ردة فعله أو إحداث تأثير عاطفي.",
+      tip:"الدولي للأمام + الزوم للخلف = تأثير Hitchcock / Vertigo الشهير.",
+      videos:[{t:"Dolly Shot Masterclass",u:"https://www.youtube.com/results?search_query=dolly+shot+cinematography+masterclass"}]
+    },
+    {
+      en:"Trucking Shot", ar:"لقطة التراكينج", badge:"مرافقة",
+      img:"https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&q=80",
+      film:"أمثلة: Children of Men, Oldboy (Corridor Scene)",
+      desc:"الكاميرا تتحرك جانبياً مواكبةً الشخصية المتحركة.",
+      effect:"إحساس بالحيوية والديناميكية — تُظهر البيئة والشخصية معاً.",
+      when:"شخصية تمشي أو تركض، مشاهد الحركة الجانبية.",
+      tip:"تُظهر العلاقة بين الشخصية والمكان في نفس الوقت.",
+      videos:[{t:"Trucking Shot Examples",u:"https://www.youtube.com/results?search_query=trucking+shot+camera+movement"}]
+    },
+    {
+      en:"Pedestal Shot", ar:"لقطة البيديستال", badge:"رأسي جسدي",
+      img:"https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=600&q=80",
+      film:"أمثلة: Mad Max: Fury Road, Mission Impossible",
+      desc:"الكاميرا ترتفع أو تنخفض جسدياً مع بقاء اتجاهها ثابتاً.",
+      effect:"متابعة حركة رأسية للشخصية بطريقة طبيعية وسلسة.",
+      when:"قفزة ممثل، صعود درج، حركة رأسية درامية.",
+      tip:"تمنح الحركة الرأسية بُعداً إضافياً وديناميكية غير متوقعة.",
+      videos:[{t:"Pedestal Shot Camera Move",u:"https://www.youtube.com/results?search_query=pedestal+shot+camera+movement+film"}]
+    },
+    {
+      en:"Crane / Boom Shot", ar:"لقطة الكرين", badge:"ختامي",
+      img:"https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=600&q=80",
+      film:"أمثلة: Lawrence of Arabia, Gone with the Wind",
+      desc:"الكاميرا على ذراع ميكانيكي ترتفع وتتحرك بنطاق واسع جداً.",
+      effect:"إضفاء شمولية وعظمة وإحساس سينمائي راقٍ على المشهد.",
+      when:"النهايات الكبيرة، الافتتاحيات الإبداعية، مشاهد الجموع.",
+      tip:"الكرين = اللقطة الختامية المثالية لأي مشهد مؤثر وكبير.",
+      videos:[{t:"Crane Shot in Cinema",u:"https://www.youtube.com/results?search_query=crane+boom+shot+cinema+examples"}]
+    }
+  ]
+};
+
+const GLOSSARY = [
+  {en:"Camera Shot",ar:"اللقطة",def:"الإطار الذي تُصوره الكاميرا في مرة واحدة دون انقطاع."},
+  {en:"Frame / Kader",ar:"الكادر",def:"حدود الصورة التي تُشكّل ما يراه المشاهد."},
+  {en:"Composition",ar:"التكوين",def:"ترتيب العناصر البصرية داخل الكادر بشكل فني ومدروس."},
+  {en:"Depth of Field",ar:"عمق المجال",def:"مسافة وضوح الصورة — ضيق = خلفية ضبابية (Bokeh)، عميق = كل شيء واضح."},
+  {en:"Rule of Thirds",ar:"قاعدة الأثلاث",def:"تقسيم الكادر لـ3 أعمدة و3 صفوف — ضع الشخصية عند نقاط التقاطع."},
+  {en:"180° Rule",ar:"قاعدة 180 درجة",def:"لا تتجاوز الخط الوهمي بين شخصيتين حتى لا يُربك المشاهد في اتجاه النظر."},
+  {en:"Cutaway",ar:"لقطة انتقالية",def:"لقطة تكميلية تُظهر شيئاً مرتبطاً بالحدث الرئيسي دون انقطاع المشهد."},
+  {en:"B-Roll",ar:"لقطات الدعم",def:"لقطات إضافية تُعزز السرد دون حوار مباشر — تُستخدم في المونتاج."},
+  {en:"Dolly",ar:"عربة الدولي",def:"منصة متحركة على سكة تحمل الكاميرا — تُتيح حركة أفقية سلسة."},
+  {en:"Crane",ar:"الكرين",def:"ذراع ميكانيكي يرفع الكاميرا لمشاهد بانورامية بزاوية عالية."},
+  {en:"Bokeh",ar:"البوكيه",def:"تأثير الخلفية الضبابية الجميلة عند استخدام عمق مجال ضيق."},
+  {en:"Mise-en-scène",ar:"ميز أون سين",def:"كل ما يُرى في الكادر — الإضاءة، الديكور، أداء الممثل، الزاوية معاً."}
+];
+
+let currentType = 'shots';
+let currentItems = [...DATA.shots];
+
+function showPage(type, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + type).classList.add('active');
+  btn.classList.add('active');
+  currentType = type;
+  if (type !== 'glossary') {
+    currentItems = [...DATA[type]];
+    renderCards(type, currentItems);
+  } else {
+    renderGlossary();
+  }
+}
+
+function renderCards(type, items) {
+  const grid = document.getElementById('grid-' + type);
+  if (!items.length) {
+    grid.innerHTML = '<p style="color:var(--text-muted);padding:2rem 0">لا توجد نتائج</p>';
+    return;
+  }
+  grid.innerHTML = items.map((item, i) => `
+    <div class="card" onclick="openModal('${type}',${DATA[type].indexOf(item)})">
+      <div class="card-img-wrap">
+        <img class="card-img" src="${item.img}" alt="${item.en}" 
+          onerror="this.style.display='none'" loading="lazy">
+        <div class="card-img-overlay"></div>
+        <span class="card-img-badge">${item.badge}</span>
+        <span class="card-img-num">0${i+1}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-en">${item.en}</div>
+        <div class="card-ar">${item.ar}</div>
+        <div class="card-desc">${item.desc.substring(0,85)}...</div>
+        <div class="card-footer">
+          <span class="card-film">${item.film.substring(0,30)}</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterCards(type, val) {
+  const f = DATA[type].filter(i =>
+    !val ||
+    i.en.toLowerCase().includes(val.toLowerCase()) ||
+    i.ar.includes(val) ||
+    i.desc.includes(val)
+  );
+  renderCards(type, f);
+}
+
+function openModal(type, idx) {
+  const item = DATA[type][idx];
+  const iw = document.getElementById('modal-img-wrap');
+  iw.innerHTML = `<img class="modal-hero-img" src="${item.img}" alt="${item.en}" onerror="this.outerHTML='<div class=modal-hero-ph>🎬</div>'">`;
+  document.getElementById('modal-tags').innerHTML = `<span class="modal-tag">${item.badge}</span><span class="modal-tag">${type === 'shots' ? 'Camera Shot' : type === 'angles' ? 'Camera Angle' : 'Camera Motion'}</span>`;
+  document.getElementById('modal-title-en').textContent = item.en;
+  document.getElementById('modal-title-ar').textContent = item.ar;
+  document.getElementById('modal-desc').textContent = item.desc;
+  document.getElementById('modal-effect').textContent = item.effect;
+  document.getElementById('modal-when').textContent = item.when;
+  const tw = document.getElementById('modal-tip-wrap');
+  if (item.tip) { document.getElementById('modal-tip').textContent = item.tip; tw.style.display = 'block'; }
+  else tw.style.display = 'none';
+  const vw = document.getElementById('modal-videos');
+  if (item.videos && item.videos.length) {
+    document.getElementById('modal-videos-list').innerHTML = item.videos.map(v =>
+      `<a class="video-link" href="${v.u}" target="_blank"><span class="video-play">▶</span>${v.t}</a>`
+    ).join('');
+    vw.style.display = 'block';
+  } else vw.style.display = 'none';
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+function closeOv(e) { if (e.target === document.getElementById('modal-overlay')) closeModal(); }
+
+function renderGlossary() {
+  document.getElementById('grid-glossary').innerHTML = GLOSSARY.map(g => `
+    <div class="gterm">
+      <div class="gterm-en">${g.en}</div>
+      <div class="gterm-ar">${g.ar}</div>
+      <div class="gterm-def">${g.def}</div>
+    </div>
+  `).join('');
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+renderCards('shots', DATA.shots);
+</script>
+</body>
+</html>
